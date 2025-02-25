@@ -2,11 +2,11 @@ import { React } from 'react';
 import { View, StyleSheet , Text } from 'react-native';
 import St from './StyleSheet';
 
-export default function Hladina({title, data}) {
+export default function Objem({title, data}) {
     return(
         <View style={[St.container, {flex: 1}]}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.data}>{data} m</Text>
+          <Text style={styles.data}>{data} l</Text>
         </View>
     );
 };
@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 26,
     fontWeight: "bold",
-    textAlign: "right",
+    textAlign: "right"
   },
 });

@@ -11,6 +11,7 @@ export default function Header ({header}) {
 
 const st = StyleSheet.create ({
     title:{
+        margin: 8,
         color: '#fff',
         fontSize: 28,
         fontWeight: 600,
@@ -18,8 +19,5 @@ const st = StyleSheet.create ({
         textAlign: 'right',
         alignSelf: 'flex-start',
         letterSpacing: 0.5,
-        shadowColor: "#0D1B2A", 
-        shadowOffset: { width: 0.5, height: 0.5 }, 
-        shadowRadius: 1,
     },
 })
