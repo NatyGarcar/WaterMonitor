@@ -5,8 +5,8 @@ import Progress from './Progress';
 
 export default function Kapacita({title, cap}) {
     return(
-        <View style={St.container}>
-          <Text style={styles.title}>{title}</Text>
+        <View style={St.dataContainer}>
+          <Text style={St.dataTitle}>{title}</Text>
           <View style={styles.databox}>
             <View>
               <Progress cap={cap}/>
@@ -18,13 +18,6 @@ export default function Kapacita({title, cap}) {
 };
 
 const styles = StyleSheet.create({
-  title:{
-    color: '#E0E1DD',
-    fontSize: 15,
-    fontWeight: 600,
-    lineHeight: 18,
-    textAlign: 'left',
-  },
   int: {
     color: '#fff',
     fontSize: 12,

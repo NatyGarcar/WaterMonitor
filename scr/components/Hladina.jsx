@@ -1,29 +1,12 @@
 import { React } from 'react';
-import { View, StyleSheet , Text } from 'react-native';
+import { View, Text } from 'react-native';
 import St from './StyleSheet';
 
 export default function Hladina({title, data}) {
     return(
-        <View style={[St.container, {flex: 1}]}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.data}>{data} m</Text>
+        <View style={[St.dataContainer, {flex: 1}]}>
+          <Text style={St.dataTitle}>{title}</Text>
+          <Text style={St.staticData}>{data} m</Text>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-  title:{
-    color: '#E0E1DD',
-    fontSize: 15,
-    fontWeight: 600,
-    lineHeight: 18,
-    textAlign: 'left',
-  },
-  data:{
-    color: "#ffffff",
-    fontSize: 24,
-    lineHeight: 26,
-    fontWeight: "bold",
-    textAlign: "right",
-  },
-});
