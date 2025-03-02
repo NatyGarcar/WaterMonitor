@@ -19,7 +19,7 @@ export default Progress;
 const styles = StyleSheet.create({
   progress: {
     height: 6,
-    width: 276,
+    width: 280,
     backgroundColor: '#0D1B2A',
     borderRadius: 2,
     flexDirection: 'column',

@@ -5,6 +5,7 @@ import Hladina from './components/Hladina';
 import Objem from './components/Objem';
 import Kapacita from './components/Kapacita';
 import Teplota from './components/Teplota';
+import Graph from './components/Graph';
 
 const cap = 0.6
 const hladina = 160
@@ -28,6 +29,7 @@ export default function App() {
 
       <Teplota w_value={w_temp} a_value={a_temp}/>
 
+      <Graph/>
     </View>
   );
 }
