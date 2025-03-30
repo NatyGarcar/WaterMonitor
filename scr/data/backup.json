@@ -1,14 +1,11 @@
 {   
-    "month": 1,
-    "day": 1,
-    "hour": 1,
     "month1": {
         "day1":{
             "date":"",
             "hour1":{
                 "distance": [],
-                "tempreature": [],
-                "datetime":["",""]
+                "tempreature": [12],
+                "datetime":["9. 3. 2025","123","456","789"]
             },
             "hour2":{
                 "distance": [],
@@ -19,6 +16,11 @@
                 "distance": [],
                 "tempreature": [],
                 "datetime":["",""]
+            },
+            "hour4":{
+                "distance": [],
+                "tempreature": [],
+                "datetime":["this works",""]
             }
         }
     }
