@@ -1,0 +1,17 @@
+[
+  {
+    "date": "1.4.2025",
+    "measure": [100, 99],
+    "tempreature": [12, 13]
+  },
+  {
+    "date": "2.4.2025",
+    "measure": [101, 100],
+    "tempreature": [13, 14]
+  },
+  {
+    "date": "3.4.2025",
+    "measure": [102, 101],
+    "tempreature": [14, 15]
+  }
+]

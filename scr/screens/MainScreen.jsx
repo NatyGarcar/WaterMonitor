@@ -10,8 +10,12 @@ import Kapacita from '../components/Kapacita';
 import Teplota from '../components/Teplota';
 import Graph from '../components/Graph';
 
+//imports data
+import cd from '../data/data.json';
+
+//data handling
 const cap = 0.6
-const hladina = 160
+const hladina = 2
 const objem = 800
 const w_temp = 12
 const a_temp = 24
