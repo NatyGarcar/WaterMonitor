@@ -1,27 +1,67 @@
-{   
-    "month1": {
-        "day1":{
-            "date":"",
-            "hour1":{
-                "distance": [],
-                "tempreature": [12],
-                "datetime":["9. 3. 2025","123","456","789"]
-            },
-            "hour2":{
-                "distance": [],
-                "tempreature": [],
-                "datetime":["",""]
-            },
-            "hour3":{
-                "distance": [],
-                "tempreature": [],
-                "datetime":["",""]
-            },
-            "hour4":{
-                "distance": [],
-                "tempreature": [],
-                "datetime":["this works",""]
-            }
-        }
-    }
-}
+[
+  {
+    "date": "1.4.2025",
+    "measure": [100, 99],
+    "tempreature": [12, 13]
+  },
+  {
+    "date": "2.4.2025",
+    "measure": [101, 100],
+    "tempreature": [13, 14]
+  },
+  {
+    "date": "3.4.2025",
+    "measure": [102, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "4.4.2025",
+    "measure": [103, 102],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "5.4.2025",
+    "measure": [104, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "6.4.2025",
+    "measure": [105, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "7.4.2025",
+    "measure": [106, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "8.4.2025",
+    "measure": [107, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "9.4.2025",
+    "measure": [108, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "10.4.2025",
+    "measure": [109, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "11.4.2025",
+    "measure": [110, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "12.4.2025",
+    "measure": [111, 101],
+    "tempreature": [14, 15]
+  },
+  {
+    "date": "13.4.2025",
+    "measure": [112, 101],
+    "tempreature": [14, 15]
+  }
+]

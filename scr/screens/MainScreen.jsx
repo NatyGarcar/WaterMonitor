@@ -11,7 +11,7 @@ import Teplota from '../components/Teplota';
 import Graph from '../components/Graph';
 
 //imports data
-import cd from '../data/data.json';
+import cd from '../data/backup.json';
 
 //data handling
 const cap = 0.6
