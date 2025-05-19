@@ -22,7 +22,7 @@ const JsonTest = () => {
     // setTemp(cd[cd.length - 1].tempreature[0].toString())
 
         const fetchData = async () => {
-            const response = await fetch("http://127.0.0.1:5000/data");
+            const response = await fetch("http://192.168.14.101/test.json");
             const result = await response.json();
             console.log(result)
             setData(result);
@@ -31,9 +31,10 @@ const JsonTest = () => {
         try{
             fetchData();
             if (data != []) {
-              setDate(data[data.length - 1].date)
-              setDist(data[data.length - 1].measure[0].toString())
-              setTemp(data[data.length - 1].tempreature[0].toString())
+              console.log(data)
+              // setDate(data[data.length - 1].date)
+              // setDist(data[data.length - 1].measure[0].toString())
+              // setTemp(data[data.length - 1].tempreature[0].toString())
             }
         } catch (error){
             console.error(error);

@@ -1,5 +1,5 @@
 //imports libraries
-import { React } from 'react';
+import { React, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 //imports components
@@ -22,6 +22,40 @@ const a_temp = 24
 
 
 const MainScreen = () => {
+
+  const [data, setData] = useState([]);
+
+  const [date, setDate] = useState('null');
+  const [dist, setDist] = useState('null');
+  const [temp, setTemp] = useState('null');
+
+  useEffect(() => {
+    const FetchJson = async () => {
+      const response = await fetch("http://192.168.14.101/data.json");
+            const result = await response.json();
+            console.warn(result);
+            setData(result);
+            if (data != []) {
+              console.log('success')
+            }
+    }
+
+    try{
+      FetchJson()
+      console.log('')
+    } catch (error){
+      console.error(error);
+    } finally{
+      setDate(data.data[0].timestamp);
+      setDist(data.data[0].distance);
+      setTemp(data.data[0].temperature);
+
+      console.log('data set');
+
+      console.log([date, dist, temp]);
+    };
+  },[])
+
     return (
       <View style={styles.background}>
         <View>

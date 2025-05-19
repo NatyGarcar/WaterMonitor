@@ -9,8 +9,8 @@ import JsonTest from './screens/JsonTest';
 export default function App() {
   return (
     <View style={{flex: 1}}>
-      <JsonTest/>
-      {/* <MainScreen/> */}
+      {/* <JsonTest/> */}
+      <MainScreen/>
     </View>
   );
 }
