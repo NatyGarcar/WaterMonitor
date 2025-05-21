@@ -1,56 +1,68 @@
 import { View, Text, FlatList, Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
-//imports data
-import cd from '../data/backup.json';
-
 const JsonTest = () => {
 
-  const [reload, setReload] = useState(1);
-  const [test, setTest] = useState('');
-  
-  const [data, setData] = useState([]);
+  const [reload, setReload] = useState(false);
+
+  const [jsonData, setJsonData] = useState([]);
+  const [latest, setLatest] = useState('');
 
   const [date, setDate] = useState('');
-  const [dist, setDist] = useState('');
-  const [temp, setTemp] = useState('');
+  const [distArray, setDistArray] = useState([]);
+  const [tempArray, setTempArray] = useState([]);
 
-  useEffect(() =>{
+  useEffect(() => {
+    const FetchJson = async () => {
+      const url = "http://192.168.14.102/database.json";
+      let response = await fetch(url);
+      const result = await response.json();
 
-    // setDate(cd[cd.length - 1].date)
-    // setDist(cd[cd.length - 1].measure[0].toString())
-    // setTemp(cd[cd.length - 1].tempreature[0].toString())
+      console.warn(result);
+      setJsonData(result.data);
+      setLatest(result.last_update)
+    }
 
-        const fetchData = async () => {
-            const response = await fetch("http://192.168.14.101/test.json");
-            const result = await response.json();
-            console.log(result)
-            setData(result);
-        };
+    try {
+      FetchJson();
+      if (jsonData != []) {
+        console.log('json fetch success')
+      }
+      else {
+        console.log('server down (try to configure ip)')
+      };
+    } catch (error) {
+      console.log(error)
+    };
+  }, []);
 
-        try{
-            fetchData();
-            if (data != []) {
-              console.log(data)
-              // setDate(data[data.length - 1].date)
-              // setDist(data[data.length - 1].measure[0].toString())
-              // setTemp(data[data.length - 1].tempreature[0].toString())
-            }
-        } catch (error){
-            console.error(error);
-        } finally{
-          console.log(data)
-        };
+  if (jsonData.length != []) {
+    if (date == '') {
+      setDate(jsonData[jsonData.length - 1].date)
+      console.log(date)
 
-    }, [reload]);
+      setDistArray(jsonData[jsonData.length - 1].distance)
+      console.log(distArray)
+
+      setTempArray(jsonData[jsonData.length - 1].temperature)
+      console.log(tempArray)
+      console.log("data set")
+    } else {
+      console.log("data already set")
+    }
+  } else {
+    console.log("no data found")
+  };
+
+
 
   return (
-    <View style={{padding: 60}}>
-      <Button title="refresh" onPress={() => setReload(reload + 1)}/>
-      <Text>{reload}</Text>
+    <View style={{ padding: 60 }}>
+      <Button title="test" onPress={() => console.log(jsonData)} />
+      <Text></Text>
       {/* <FlatList data={cd.slice(-1)} keyExtractor={(item) => {item.date}} renderItem={({item}) => <Text>{item.measure[0]}</Text>}/> */}
-      <Text>{date} {test}</Text>
-      <Text>distance: {dist}, tempreature: {temp}</Text>
+      <Text>{latest} {null}</Text>
+      <Text>date: {date} distance: {distArray}, tempreature: {tempArray}</Text>
     </View>
   )
 };

@@ -1,6 +1,6 @@
 //imports libraries
 import { React, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 //imports components
 import Header from '../components/Header';
@@ -9,9 +9,6 @@ import Objem from '../components/Objem';
 import Kapacita from '../components/Kapacita';
 import Teplota from '../components/Teplota';
 import Graph from '../components/Graph';
-
-//imports data
-import cd from '../data/backup.json';
 
 //data handling
 const cap = 0.6
@@ -23,68 +20,93 @@ const a_temp = 24
 
 const MainScreen = () => {
 
-  const [data, setData] = useState([]);
+  //allows data reload
+  const [reload, setReload] = useState(false);
 
-  const [date, setDate] = useState('null');
-  const [dist, setDist] = useState('null');
-  const [temp, setTemp] = useState('null');
+  //gets main data from json
+  const [jsonData, setJsonData] = useState([]);
+  const [latest, setLatest] = useState('');
 
+  //loads specific data from json
+  const [date, setDate] = useState('');
+  const [distArray, setDistArray] = useState([]);
+  const [tempArray, setTempArray] = useState([]);
+
+  //fetch data function
   useEffect(() => {
     const FetchJson = async () => {
-      const response = await fetch("http://192.168.14.101/data.json");
-            const result = await response.json();
-            console.warn(result);
-            setData(result);
-            if (data != []) {
-              console.log('success')
-            }
-    }
+      const url = "http://192.168.14.102/database.json";
+      let response = await fetch(url);
+      const result = await response.json();
 
-    try{
-      FetchJson()
-      console.log('')
-    } catch (error){
-      console.error(error);
-    } finally{
-      setDate(data.data[0].timestamp);
-      setDist(data.data[0].distance);
-      setTemp(data.data[0].temperature);
-
-      console.log('data set');
-
-      console.log([date, dist, temp]);
+      console.warn(result);
+      setJsonData(result.data);
+      setLatest(result.last_update);
     };
-  },[])
 
-    return (
-      <View style={styles.background}>
-        <View>
-          <Header header="Meranie vody v studni"/>
-        </View>
+    try {
+      FetchJson();
+      if (jsonData != []) {
+        console.log('json fetch success');
+      }
+      else {
+        console.log('server down (try to configure ip)');
+      };
+    } catch (error) {
+      console.log(error);
+    };
+  }, []);
 
-        <View style={{flexDirection: 'row'}}>
-          <Hladina title="Hladina" data={hladina}/>
-          <Objem title="Objem" data={objem}/>
-        </View>
-  
-        <Kapacita title="Kapacita" cap={cap}/>
-  
-        <Teplota w_value={w_temp} a_value={a_temp}/>
-  
-        <Graph/>
-        
+  if (jsonData.length != []) {
+    if (date == '') {
+      //sets date, distance array and temperature array
+      setDate(jsonData[jsonData.length - 1].date);
+      console.log(date);
+
+      setDistArray(jsonData[jsonData.length - 1].distance);
+      console.log(distArray);
+
+      setTempArray(jsonData[jsonData.length - 1].temperature);
+      console.log(tempArray);
+      console.log("data set");
+    } else {
+      console.log("data already set");
+    };
+  } else {
+    console.log("no data found");
+  };
+
+  return (
+    <View style={styles.background}>
+      <View>
+        <Header header="Meranie vody v studni" />
       </View>
-    );
+
+      <View style={{ flexDirection: 'row' }}>
+        <Hladina title="Hladina" data={null} />
+        <Objem title="Objem" data={objem} />
+      </View>
+
+      <Kapacita title="Kapacita" cap={cap} />
+
+      <Teplota w_value={w_temp} a_value={a_temp} />
+
+      <Graph />
+
+      <Text style={{color: "#fff"}}>last measured: {latest}</Text>
+
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    background: {
-      flex: 1,
-      backgroundColor: '#778DA9',
-      paddingTop: 46,
-      paddingBottom: 40,
-      paddingHorizontal: 16,
-    },
-  });
+  background: {
+    flex: 1,
+    backgroundColor: '#0D1B2A',
+    paddingTop: 46,
+    paddingBottom: 40,
+    paddingHorizontal: 16,
+  },
+});
 
 export default MainScreen
