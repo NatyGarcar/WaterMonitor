@@ -11,7 +11,7 @@ export default function Kapacita({title, cap}) {
             <View>
               <Progress cap={cap}/>
             </View>
-            <Text style={styles.int}>{Math.round(cap*100)}%</Text>
+            <Text style={styles.int}>{cap}%</Text>
           </View>
         </View>
     );

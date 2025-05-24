@@ -1,102 +1,71 @@
-//*imports libraries*
-import { React, useEffect, useState } from 'react';
+// *imports libraries*
+import { React, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-//*imports styles*
+// *imports styles*
 import St from '../components/StyleSheet';
 
-//*imports components*
+// *imports components*
 import Header from '../components/Header';
 import Hladina from '../components/Hladina';
 import Objem from '../components/Objem';
 import Kapacita from '../components/Kapacita';
 import Teplota from '../components/Teplota';
 import Graph from '../components/Graph';
-import NavBar from '../components/NavBar';
+import useFetch from '../hooks/useFetch';
 
-//*temporary static data* (to be deleted)
-const cap = 0.6
-const objem = 800
-const a_temp = 24
-
+// *import setting*
+import { url, fullDepth, radius, fullCapacity } from '../settings';
 
 const MainScreen = () => {
 
-  //*allows data reload*
-  const [reload, setReload] = useState(false);
-
-  //*gets main data from json*
-  const [jsonData, setJsonData] = useState([]);
-  const [latest, setLatest] = useState('');
-
-  //*loads specific data from json*
+  // *stores variables*
   const [date, setDate] = useState('');
   const [distArray, setDistArray] = useState([]);
   const [tempArray, setTempArray] = useState([]);
 
-  //*fetch data function*
-  useEffect(() => {
-    const FetchJson = async () => {
-      const url = "http://193.87.164.219/database.json";
-      let response = await fetch(url);
-      const result = await response.json();
+  // *data fetch handling*
+  const { jsonData, latest, isPending, error } = useFetch(url);
 
-      console.warn(result);
-      setJsonData(result.data);
-      setLatest(result.last_update);
-    };
-
-    try {
-      FetchJson();
-      if (jsonData != []) {
-        console.log('json fetch success');
-      }
-      else {
-        console.log('server down (try to configure ip)');
-      };
-    } catch (error) {
-      console.log(error);
-    };
-  }, []);
-
-  if (jsonData.length != []) {
-    if (date == '') {
-      //*sets date, distance array and temperature array*
-
-      setDate(jsonData[jsonData.length - 1].date);
-      // console.log(date);
-
-      setDistArray(jsonData[jsonData.length - 1].distance);
-      // console.log(distArray);
-
-      setTempArray(jsonData[jsonData.length - 1].temperature);
-      // console.log(tempArray);
-      console.log("data set");
-    } else {
-      console.log("data already set");
-    };
-  } else {
-    console.log("no data found");
+  // *measured data*
+  if (jsonData && date === '') {
+    setDate(jsonData[jsonData.length - 1].date);
+    setDistArray(jsonData[jsonData.length - 1].distance);
+    setTempArray(jsonData[jsonData.length - 1].temperature);
   };
+
+  // *calculated data*
+  var surface = (fullDepth - (distArray[distArray.length - 1] / 100)).toFixed(2)
+  var volume = ((3.14*radius**2*surface)*1000).toFixed()
+  var capacity = (volume/fullCapacity*100).toFixed(1)
+  var airTemp = "N/A"
+
+  // *reload function*
+  const [reload, setReload] = useState(false);
 
   return (
     <View style={styles.background}>
-      <View>
-        <Header header="Meranie vody v studni" />
-      </View>
+      {isPending && <Text style={St.text}>loading...</Text>}
+      {error && <Text style={[St.text, { alignSelf: "center" }]}>{error}</Text>}
+      {jsonData && <View>
+        <View>
+          <Header header="Meranie vody v studni" />
+        </View>
 
-      <View style={{ flexDirection: 'row' }}>
-        <Hladina title="Hladina" data={distArray[distArray.length - 1]} />
-        <Objem title="Objem" data={objem} />
-      </View>
+        <View style={{ flexDirection: 'row' }}>
+          <Hladina title="Hladina" data={surface} />
+          <Objem title="Objem" data={volume} />
+        </View>
 
-      <Kapacita title="Kapacita" cap={cap} />
+        <Kapacita title="Kapacita" cap={capacity} />
 
-      <Teplota w_value={tempArray[tempArray.length - 1]} a_value={a_temp} />
+        <Teplota w_value={tempArray[tempArray.length - 1]} a_value={airTemp} />
 
-      <Graph />
+        <Graph jsonData={JSON.stringify(jsonData)} />
 
-      <Text style={St.text}>last measured: {latest}</Text>
+        <Text style={St.text}>last measured: {latest}</Text>
+      </View>}
+
     </View>
   );
 }

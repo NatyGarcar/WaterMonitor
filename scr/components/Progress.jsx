@@ -2,14 +2,10 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
-interface Props{
-  cap: number
-}
-
-const Progress = ({cap} : Props) => (
+const Progress = ({cap}) => (
   <View style={styles.border}>
     <View style={styles.gap}>
-      <ProgressBar progress={cap} color={'#fff'} style={styles.progress} />
+      <ProgressBar progress={cap/100} color={'#fff'} style={styles.progress} />
     </View>
   </View>
 );

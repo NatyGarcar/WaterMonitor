@@ -1,14 +1,19 @@
-import { View, StyleSheet } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import St from './StyleSheet';
 
-const data = {
-  Week:{}
-};
+const Graph = (jsonData) => {
+  const data = JSON.parse(jsonData)
+  //console.log(jsonData)
+  //console.log(jsonData[0])
+  const graphData = {
+    labels:[jsonData[0]],
+    data:[]
+  }
 
-const Graph = () => {
   return (
-    <View>
-
+    <View style={St.dataContainer}>
+      <Text>{}</Text>
     </View>
   )
 }

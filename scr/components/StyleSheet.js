@@ -28,7 +28,8 @@ const St = StyleSheet.create({
   },
   text: {
     color: "white",
-    size: 10
+    size: 10,
+    paddingHorizontal: 10
   }
 });
 
