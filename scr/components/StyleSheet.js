@@ -17,6 +17,7 @@ const St = StyleSheet.create({
     fontWeight: 600,
     lineHeight: 18,
     textAlign: 'left',
+    // paddingBottom: 8
   },
   staticData: {
     color: "#ffffff",
@@ -25,6 +26,10 @@ const St = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
+  text: {
+    color: "white",
+    size: 10
+  }
 });
 
 export default St;

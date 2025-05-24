@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
   progress: {
     height: 6,
     width: 280,
-    backgroundColor: '#0D1B2A',
+    backgroundColor: '#1B263B',
     borderRadius: 2,
     flexDirection: 'column',
   },
   gap: {
-    backgroundColor: '#0D1B2A',
+    backgroundColor: '#1B263B',
     borderRadius: 4,
     padding: 2,
   },
