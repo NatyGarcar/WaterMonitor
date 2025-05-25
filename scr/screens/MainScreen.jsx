@@ -35,10 +35,11 @@ const MainScreen = () => {
   };
 
   // *calculated data*
-  var surface = (fullDepth - (distArray[distArray.length - 1] / 100)).toFixed(2)
-  var volume = ((3.14*radius**2*surface)*1000).toFixed()
-  var capacity = (volume/fullCapacity*100).toFixed(1)
-  var airTemp = "N/A"
+  var surface = (fullDepth - (distArray[distArray.length - 1] / 100)).toFixed(2);
+  var volume = ((3.14*radius**2*surface)*1000).toFixed();
+  var capacity = (volume/fullCapacity*100).toFixed(1);
+  var waterTemp = tempArray[tempArray.length - 1];
+  var airTemp = "N/A";
 
   // *reload function*
   const [reload, setReload] = useState(false);
@@ -59,9 +60,9 @@ const MainScreen = () => {
 
         <Kapacita title="Kapacita" cap={capacity} />
 
-        <Teplota w_value={tempArray[tempArray.length - 1]} a_value={airTemp} />
+        <Teplota w_value={waterTemp} a_value={airTemp} />
 
-        <Graph jsonData={JSON.stringify(jsonData)} />
+        <Graph jsonData={jsonData} />
 
         <Text style={St.text}>last measured: {latest}</Text>
       </View>}
