@@ -15,8 +15,8 @@ export default function App() {
     <View style={{ flex: 1 }}>
       <StatusBar style='light'/>
       {/* <JsonTest/> */}
-      <MainScreen />
-      {/* <GraphScreen/> */}
+      {/* <MainScreen /> */}
+      <GraphScreen/>
       {/* <InfoScreen/> */}
       <NavBar/>
     </View>

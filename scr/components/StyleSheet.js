@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const St = StyleSheet.create({
+  background: {
+    flex: 1,
+    backgroundColor: '#0D1B2A',
+    paddingTop: 46,
+    paddingBottom: 40,
+    paddingHorizontal: 16,
+  },
   dataContainer: {
     //flex: 1,
     padding: 16,

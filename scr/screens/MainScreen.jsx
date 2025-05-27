@@ -1,6 +1,6 @@
 // *imports libraries*
 import { React, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
 // *imports styles*
 import St from '../components/StyleSheet';
@@ -45,7 +45,7 @@ const MainScreen = () => {
   const [reload, setReload] = useState(false);
 
   return (
-    <View style={styles.background}>
+    <View style={St.background}>
       {isPending && <Text style={St.text}>loading...</Text>}
       {error && <Text style={[St.text, { alignSelf: "center" }]}>{error}</Text>}
       {jsonData && <View>
@@ -70,15 +70,5 @@ const MainScreen = () => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    backgroundColor: '#0D1B2A',
-    paddingTop: 46,
-    paddingBottom: 40,
-    paddingHorizontal: 16,
-  },
-});
 
 export default MainScreen
