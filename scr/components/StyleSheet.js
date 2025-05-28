@@ -35,8 +35,12 @@ const St = StyleSheet.create({
   },
   text: {
     color: "white",
-    size: 10,
     paddingHorizontal: 10
+  },
+  infoText: {
+    color: "white",
+    fontSize: 18,
+    padding: 10
   }
 });
 

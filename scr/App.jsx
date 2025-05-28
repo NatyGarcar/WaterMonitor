@@ -13,12 +13,12 @@ import NavBar from './components/NavBar';
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar style='light'/>
+      <StatusBar style='light' />
       {/* <JsonTest/> */}
-      {/* <MainScreen /> */}
-      <GraphScreen/>
+      <MainScreen />
+      {/* <GraphScreen /> */}
       {/* <InfoScreen/> */}
-      <NavBar/>
+      <NavBar />
     </View>
   );
 }

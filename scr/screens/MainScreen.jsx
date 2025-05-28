@@ -1,21 +1,20 @@
 // *imports libraries*
 import { React, useState } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 // *imports styles*
 import St from '../components/StyleSheet';
 
 // *imports components*
+import BasicData from '../components/BasicData';
+import Capacity from '../components/capacity/Capacity';
+import WeeklyGraph from '../components/graphs/WeeklyGraph';
 import Header from '../components/Header';
-import Hladina from '../components/Hladina';
-import Objem from '../components/Objem';
-import Kapacita from '../components/Kapacita';
-import Teplota from '../components/Teplota';
-import Graph from '../components/Graph';
+import Temperature from '../components/temperature/Temperature';
 import useFetch from '../hooks/useFetch';
 
 // *import setting*
-import { url, fullDepth, radius, fullCapacity } from '../settings';
+import { fullCapacity, fullDepth, radius, url } from '../settings';
 
 const MainScreen = () => {
 
@@ -46,7 +45,7 @@ const MainScreen = () => {
 
   return (
     <View style={St.background}>
-      {isPending && <Text style={St.text}>loading...</Text>}
+      {isPending && <Text style={[St.text, { alignSelf: "center" }]}>načítavanie...</Text>}
       {error && <Text style={[St.text, { alignSelf: "center" }]}>{error}</Text>}
       {jsonData && <View>
         <View>
@@ -54,19 +53,18 @@ const MainScreen = () => {
         </View>
 
         <View style={{ flexDirection: 'row' }}>
-          <Hladina title="Hladina" data={surface} />
-          <Objem title="Objem" data={volume} />
+          <BasicData title="Hladina" data={surface} unit="m" />
+          <BasicData title="Objem" data={volume} unit="l" />
         </View>
 
-        <Kapacita title="Kapacita" cap={capacity} />
+        <Capacity title="Kapacita" cap={capacity} />
 
-        <Teplota w_value={waterTemp} a_value={airTemp} />
+        <Temperature w_value={waterTemp} a_value={airTemp} />
 
-        <Graph jsonData={jsonData} />
+        <WeeklyGraph title="Týždenný prehľad" jsonData={jsonData} />
 
-        <Text style={St.text}>last measured: {latest}</Text>
+        <Text style={St.text}>posledné meranie: {latest}</Text>
       </View>}
-
     </View>
   );
 }
